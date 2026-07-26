@@ -13,15 +13,38 @@ grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("3")
 
+[node name="ColorRect" type="ColorRect" parent="." unique_id=2082855885]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.4465629, 0.17083427, 0.3155138, 1)
+
 [node name="tabs" type="TabContainer" parent="." unique_id=183554882]
 layout_mode = 0
 anchor_right = 1.0
 anchor_bottom = 1.0
 current_tab = 0
 
-[node name="pathsEditor" parent="tabs" unique_id=998332303 instance=ExtResource("2")]
+[node name="Options" type="PanelContainer" parent="tabs" unique_id=1874690570]
 layout_mode = 2
 metadata/_tab_index = 0
+
+[node name="vb" type="VBoxContainer" parent="tabs/Options" unique_id=1357825409]
+layout_mode = 2
+
+[node name="pathsEditor" parent="tabs/Options/vb" unique_id=998332303 instance=ExtResource("2")]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="Label" type="Label" parent="tabs/Options/vb" unique_id=1284050101]
+layout_mode = 2
+theme_override_colors/font_color = Color(1, 1, 1, 0.49803922)
+text = "Selinoccino 2026"
+horizontal_alignment = 2
+vertical_alignment = 2
 
 [node name="plantsEditor" parent="tabs" unique_id=1380034137 instance=ExtResource("1")]
 visible = false

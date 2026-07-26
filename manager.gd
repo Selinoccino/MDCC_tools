@@ -67,3 +67,23 @@ func getDefaultPaths() -> PackedStringArray:
 
 func getPath(id:String) -> String:
 	return paths.get(id, "")
+
+func loadFromJsonFile(path:String, type:Variant.Type, nullv:Variant=null) -> Variant:
+	var f := FileAccess.open(path, FileAccess.READ)
+	if !f:
+		return nullv
+	
+	var test_json_conv = JSON.new()
+	
+	if test_json_conv.parse(f.get_as_text())!=OK:
+		f.close()
+		return nullv
+	
+	var result : Variant = test_json_conv.get_data()
+	
+	if typeof(result) != type:
+		f.close()
+		return nullv
+	
+	f.close()
+	return result

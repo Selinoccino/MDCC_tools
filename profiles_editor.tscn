@@ -1,0 +1,46 @@
+[gd_scene format=3 uid="uid://bdsbryl1ms02o"]
+
+[ext_resource type="Script" uid="uid://cw0xynmtfms0i" path="res://profiles_editor.gd" id="1_ihgve"]
+
+[node name="profilesEditor" type="HSplitContainer" unique_id=22526534]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+split_offsets = PackedInt32Array(-1)
+split_offset = -1
+script = ExtResource("1_ihgve")
+
+[node name="left" type="VSplitContainer" parent="." unique_id=1277207668]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="profsTree" type="Tree" parent="left" unique_id=1481682645]
+layout_mode = 2
+size_flags_vertical = 3
+hide_root = true
+scroll_horizontal_enabled = false
+
+[node name="pc" type="PanelContainer" parent="." unique_id=2101529151]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+size_flags_stretch_ratio = 2.0
+
+[node name="sc" type="ScrollContainer" parent="pc" unique_id=363759026]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 3.0
+horizontal_scroll_mode = 0
+
+[node name="editor" type="VBoxContainer" parent="pc/sc" unique_id=510373503]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="idhb" type="HBoxContainer" parent="pc/sc/editor" unique_id=1526943834]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="pc/sc/editor/idhb" unique_id=538535570]
+layout_mode = 2
