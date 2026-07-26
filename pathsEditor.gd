@@ -1,6 +1,11 @@
-extends VBoxContainer
+extends Control
+
+onready var pathc = $vb/sc/vb
 
 func populatePaths() -> void:
+	for n in pathc.get_children():
+		n.free()
+	
 	for path in Manager.paths.keys():
 		addPath(path, Manager.getPath(path))
 	
@@ -29,22 +34,22 @@ func addPath(id:String, path:String) -> void:
 	hb.add_child(ledit)
 	hb.add_child(lbrowse)
 	
-	self.add_child(hb)
+	pathc.add_child(hb)
 	
 
 func browsePath(id:String) -> void:
 	$FileDialog.popup_centered_ratio()
 	var new : String = yield($FileDialog, "file_selected")
 	
-	Manager.addPath(id, new)
-	var n = get_node_or_null(id)
+#	Manager.addPath(id, new)
+	var n = pathc.get_node_or_null(id)
 	if n:
 		n.get_child(1).text = new
+		pathEdited(new, id)
 
 func pathEdited(new_path:String, id:String) -> void:
 	Manager.addPath(id, new_path)
-	
+	Manager.saveToConfigFile()
 
 func _ready():
 	populatePaths()
-

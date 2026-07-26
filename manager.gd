@@ -14,9 +14,9 @@ func addPath(id:String, path:String) -> void:
 	paths[id]=path
 
 func _ready():
-	loadFromConfigFile("")
+	loadFromConfigFile("user://recent.ini")
 
-func loadFromConfigFile(configPath:String) -> void:
+func loadFromConfigFile(configPath:String="user://recent.ini") -> void:
 	var conf := ConfigFile.new()
 	
 	for path in getDefaultPaths():
@@ -30,7 +30,7 @@ func loadFromConfigFile(configPath:String) -> void:
 		addPath(key, conf.get_value(ConfigPathsKey, key, ""))
 
 ## returns success saving
-func saveToConfigFile(configFile:String) -> bool:
+func saveToConfigFile(configFile:String="user://recent.ini") -> bool:
 	var conf := ConfigFile.new()
 	
 	for id in paths.keys():
