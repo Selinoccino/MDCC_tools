@@ -1,0 +1,338 @@
+[gd_scene load_steps=2 format=2]
+
+[ext_resource path="res://plantsEditor.gd" type="Script" id=1]
+
+[node name="plantsEditor" type="HBoxContainer"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+script = ExtResource( 1 )
+
+[node name="allvb" type="VBoxContainer" parent="."]
+margin_right = 255.0
+margin_bottom = 600.0
+size_flags_horizontal = 3
+
+[node name="buttons" type="ScrollContainer" parent="allvb"]
+margin_right = 255.0
+margin_bottom = 298.0
+size_flags_vertical = 3
+
+[node name="pc" type="PanelContainer" parent="allvb/buttons"]
+margin_right = 255.0
+margin_bottom = 298.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="vb" type="VBoxContainer" parent="allvb/buttons/pc"]
+margin_left = 7.0
+margin_top = 7.0
+margin_right = 248.0
+margin_bottom = 291.0
+
+[node name="controls" type="ScrollContainer" parent="allvb"]
+margin_top = 302.0
+margin_right = 255.0
+margin_bottom = 600.0
+size_flags_vertical = 3
+
+[node name="pc" type="PanelContainer" parent="allvb/controls"]
+margin_right = 255.0
+margin_bottom = 298.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="vb" type="VBoxContainer" parent="allvb/controls/pc"]
+margin_left = 7.0
+margin_top = 7.0
+margin_right = 248.0
+margin_bottom = 291.0
+
+[node name="reload" type="Button" parent="allvb/controls/pc/vb"]
+margin_right = 241.0
+margin_bottom = 20.0
+text = "Reload from file"
+
+[node name="save" type="Button" parent="allvb/controls/pc/vb"]
+margin_top = 24.0
+margin_right = 241.0
+margin_bottom = 44.0
+text = "Save to file"
+
+[node name="sc" type="ScrollContainer" parent="."]
+margin_left = 259.0
+margin_right = 1024.0
+margin_bottom = 600.0
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 3.0
+scroll_horizontal_enabled = false
+
+[node name="pc" type="PanelContainer" parent="sc"]
+margin_right = 765.0
+margin_bottom = 600.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="actualEditor" type="VBoxContainer" parent="sc/pc"]
+margin_left = 7.0
+margin_top = 7.0
+margin_right = 758.0
+margin_bottom = 593.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+size_flags_stretch_ratio = 3.0
+
+[node name="idhb" type="HBoxContainer" parent="sc/pc/actualEditor"]
+margin_right = 751.0
+margin_bottom = 24.0
+
+[node name="l" type="Label" parent="sc/pc/actualEditor/idhb"]
+margin_top = 5.0
+margin_right = 51.0
+margin_bottom = 19.0
+text = "Plant ID"
+
+[node name="idedit" type="LineEdit" parent="sc/pc/actualEditor/idhb"]
+margin_left = 55.0
+margin_right = 692.0
+margin_bottom = 24.0
+size_flags_horizontal = 3
+
+[node name="currentId" type="Label" parent="sc/pc/actualEditor/idhb"]
+margin_left = 696.0
+margin_top = 5.0
+margin_right = 751.0
+margin_bottom = 19.0
+text = "Current: "
+
+[node name="namehb" type="HBoxContainer" parent="sc/pc/actualEditor"]
+margin_top = 28.0
+margin_right = 751.0
+margin_bottom = 52.0
+
+[node name="l" type="Label" parent="sc/pc/actualEditor/namehb"]
+margin_top = 5.0
+margin_right = 38.0
+margin_bottom = 19.0
+text = "Name"
+
+[node name="nameedit" type="LineEdit" parent="sc/pc/actualEditor/namehb"]
+margin_left = 42.0
+margin_right = 751.0
+margin_bottom = 24.0
+size_flags_horizontal = 3
+
+[node name="deschb" type="VBoxContainer" parent="sc/pc/actualEditor"]
+margin_top = 56.0
+margin_right = 751.0
+margin_bottom = 174.0
+
+[node name="l" type="Label" parent="sc/pc/actualEditor/deschb"]
+margin_right = 751.0
+margin_bottom = 14.0
+text = "Description"
+
+[node name="descedit" type="TextEdit" parent="sc/pc/actualEditor/deschb"]
+margin_top = 18.0
+margin_right = 751.0
+margin_bottom = 118.0
+rect_min_size = Vector2( 0, 100 )
+size_flags_horizontal = 3
+wrap_enabled = true
+
+[node name="growthhb" type="HBoxContainer" parent="sc/pc/actualEditor"]
+margin_top = 178.0
+margin_right = 751.0
+margin_bottom = 202.0
+
+[node name="l" type="Label" parent="sc/pc/actualEditor/growthhb"]
+margin_top = 5.0
+margin_right = 121.0
+margin_bottom = 19.0
+hint_tooltip = "Days watered required to mature"
+mouse_filter = 0
+text = "Growth time (days)"
+
+[node name="dayssb" type="SpinBox" parent="sc/pc/actualEditor/growthhb"]
+margin_left = 125.0
+margin_right = 751.0
+margin_bottom = 24.0
+size_flags_horizontal = 3
+value = 1.0
+rounded = true
+allow_greater = true
+
+[node name="rarityhb" type="HBoxContainer" parent="sc/pc/actualEditor"]
+margin_top = 206.0
+margin_right = 751.0
+margin_bottom = 230.0
+
+[node name="l" type="Label" parent="sc/pc/actualEditor/rarityhb"]
+margin_top = 5.0
+margin_right = 36.0
+margin_bottom = 19.0
+hint_tooltip = "Seed rarity
+0 is unique"
+mouse_filter = 0
+text = "Rarity"
+
+[node name="raritysb" type="SpinBox" parent="sc/pc/actualEditor/rarityhb"]
+margin_left = 40.0
+margin_right = 751.0
+margin_bottom = 24.0
+size_flags_horizontal = 3
+value = 1.0
+rounded = true
+allow_greater = true
+
+[node name="neglecthb" type="HBoxContainer" parent="sc/pc/actualEditor"]
+margin_top = 234.0
+margin_right = 751.0
+margin_bottom = 258.0
+
+[node name="l" type="Label" parent="sc/pc/actualEditor/neglecthb"]
+margin_top = 5.0
+margin_right = 122.0
+margin_bottom = 19.0
+hint_tooltip = "Max. days unwatered before death"
+mouse_filter = 0
+text = "Max. neglect (days)"
+
+[node name="neglectsb" type="SpinBox" parent="sc/pc/actualEditor/neglecthb"]
+margin_left = 126.0
+margin_right = 751.0
+margin_bottom = 24.0
+size_flags_horizontal = 3
+value = 1.0
+rounded = true
+allow_greater = true
+
+[node name="harvestshb" type="HBoxContainer" parent="sc/pc/actualEditor"]
+margin_top = 262.0
+margin_right = 751.0
+margin_bottom = 286.0
+
+[node name="l" type="Label" parent="sc/pc/actualEditor/harvestshb"]
+margin_top = 5.0
+margin_right = 88.0
+margin_bottom = 19.0
+hint_tooltip = "Max. times harvested before death"
+mouse_filter = 0
+text = "Max. harvests"
+
+[node name="harvestssb" type="SpinBox" parent="sc/pc/actualEditor/harvestshb"]
+margin_left = 92.0
+margin_right = 751.0
+margin_bottom = 24.0
+size_flags_horizontal = 3
+value = 1.0
+rounded = true
+allow_greater = true
+
+[node name="cooldownhb" type="HBoxContainer" parent="sc/pc/actualEditor"]
+margin_top = 290.0
+margin_right = 751.0
+margin_bottom = 314.0
+
+[node name="l" type="Label" parent="sc/pc/actualEditor/cooldownhb"]
+margin_top = 5.0
+margin_right = 142.0
+margin_bottom = 19.0
+hint_tooltip = "Days between harvests"
+mouse_filter = 0
+text = "Harvest interval (days)"
+
+[node name="cooldownsb" type="SpinBox" parent="sc/pc/actualEditor/cooldownhb"]
+margin_left = 146.0
+margin_right = 751.0
+margin_bottom = 24.0
+size_flags_horizontal = 3
+value = 1.0
+rounded = true
+allow_greater = true
+
+[node name="HSeparator2" type="HSeparator" parent="sc/pc/actualEditor"]
+margin_top = 318.0
+margin_right = 751.0
+margin_bottom = 322.0
+
+[node name="Label2" type="Label" parent="sc/pc/actualEditor"]
+margin_top = 326.0
+margin_right = 751.0
+margin_bottom = 340.0
+text = "Items"
+align = 1
+
+[node name="itemsc" type="ScrollContainer" parent="sc/pc/actualEditor"]
+margin_top = 344.0
+margin_right = 751.0
+margin_bottom = 426.0
+size_flags_vertical = 3
+scroll_horizontal_enabled = false
+
+[node name="pc" type="PanelContainer" parent="sc/pc/actualEditor/itemsc"]
+margin_right = 751.0
+margin_bottom = 82.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="vb" type="VBoxContainer" parent="sc/pc/actualEditor/itemsc/pc"]
+margin_left = 7.0
+margin_top = 7.0
+margin_right = 744.0
+margin_bottom = 75.0
+
+[node name="addItem" type="Button" parent="sc/pc/actualEditor"]
+margin_top = 430.0
+margin_right = 751.0
+margin_bottom = 450.0
+text = "Add Item"
+
+[node name="HSeparator" type="HSeparator" parent="sc/pc/actualEditor"]
+margin_top = 454.0
+margin_right = 751.0
+margin_bottom = 458.0
+
+[node name="Label" type="Label" parent="sc/pc/actualEditor"]
+margin_top = 462.0
+margin_right = 751.0
+margin_bottom = 476.0
+text = "Ingredients"
+align = 1
+
+[node name="ingsc" type="ScrollContainer" parent="sc/pc/actualEditor"]
+margin_top = 480.0
+margin_right = 751.0
+margin_bottom = 562.0
+size_flags_vertical = 3
+scroll_horizontal_enabled = false
+
+[node name="pc" type="PanelContainer" parent="sc/pc/actualEditor/ingsc"]
+margin_right = 751.0
+margin_bottom = 82.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="vb" type="VBoxContainer" parent="sc/pc/actualEditor/ingsc/pc"]
+margin_left = 7.0
+margin_top = 7.0
+margin_right = 744.0
+margin_bottom = 75.0
+
+[node name="addIngredient" type="Button" parent="sc/pc/actualEditor"]
+margin_top = 566.0
+margin_right = 751.0
+margin_bottom = 586.0
+text = "Add Ingredient"
+
+[connection signal="pressed" from="allvb/controls/pc/vb/reload" to="." method="_on_reload_pressed"]
+[connection signal="pressed" from="allvb/controls/pc/vb/save" to="." method="saveToFile"]
+[connection signal="text_entered" from="sc/pc/actualEditor/idhb/idedit" to="." method="_on_idedit_text_entered"]
+[connection signal="text_changed" from="sc/pc/actualEditor/namehb/nameedit" to="." method="_on_nameedit_text_changed"]
+[connection signal="text_changed" from="sc/pc/actualEditor/deschb/descedit" to="." method="_on_descedit_text_changed"]
+[connection signal="value_changed" from="sc/pc/actualEditor/growthhb/dayssb" to="." method="_on_dayssb_value_changed"]
+[connection signal="value_changed" from="sc/pc/actualEditor/rarityhb/raritysb" to="." method="_on_raritysb_value_changed"]
+[connection signal="value_changed" from="sc/pc/actualEditor/neglecthb/neglectsb" to="." method="_on_neglectsb_value_changed"]
+[connection signal="value_changed" from="sc/pc/actualEditor/harvestshb/harvestssb" to="." method="_on_harvestssb_value_changed"]
+[connection signal="value_changed" from="sc/pc/actualEditor/cooldownhb/cooldownsb" to="." method="_on_cooldownsb_value_changed"]
+[connection signal="pressed" from="sc/pc/actualEditor/addItem" to="." method="_on_addItem_pressed"]
+[connection signal="pressed" from="sc/pc/actualEditor/addIngredient" to="." method="_on_addIngredient_pressed"]
