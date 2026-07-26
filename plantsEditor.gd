@@ -215,3 +215,33 @@ func saveToFile() -> bool:
 	f.close()
 	
 	return true
+
+
+func _on_delete_pressed():
+	var n = plantButtons.get_node_or_null(selected)
+	if n:
+		n.free()
+	
+	cached.erase(selected)
+	selectPlant("")
+
+
+func _on_create_pressed():
+	var i : int = 0
+	while "plant%s" % i in cached.keys():
+		i += 1
+	
+	cached["plant%s" % i] = {
+		"growthTime":1,
+		"maxHarvests":1,
+		"name":"Plant",
+		"description":"",
+		"maxUnwateredLifespan":1,
+		"harvestingCooldown":1,
+		"rarity":1,
+	}
+	
+	for type in itemTypes.values():
+		cached["plant%s" % i][getItemKey(type)] = []
+	
+	addPlantButton("plant%s" % i, "Plant")

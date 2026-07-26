@@ -63,7 +63,7 @@ func _init():
 	
 
 func setAmount(new:int) -> void:
-	amountsb.value = new
+	amountsb.set_value_no_signal(new)
 
 func getAmount() -> int:
 	return int(amountsb.value)

@@ -58,6 +58,18 @@ margin_right = 241.0
 margin_bottom = 44.0
 text = "Save to file"
 
+[node name="delete" type="Button" parent="allvb/controls/pc/vb"]
+margin_top = 48.0
+margin_right = 241.0
+margin_bottom = 68.0
+text = "Delete selected"
+
+[node name="create" type="Button" parent="allvb/controls/pc/vb"]
+margin_top = 72.0
+margin_right = 241.0
+margin_bottom = 92.0
+text = "New plant"
+
 [node name="sc" type="ScrollContainer" parent="."]
 margin_left = 259.0
 margin_right = 1024.0
@@ -67,22 +79,22 @@ size_flags_stretch_ratio = 3.0
 scroll_horizontal_enabled = false
 
 [node name="pc" type="PanelContainer" parent="sc"]
-margin_right = 765.0
-margin_bottom = 600.0
+margin_right = 753.0
+margin_bottom = 736.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 
 [node name="actualEditor" type="VBoxContainer" parent="sc/pc"]
 margin_left = 7.0
 margin_top = 7.0
-margin_right = 758.0
-margin_bottom = 593.0
+margin_right = 746.0
+margin_bottom = 729.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 size_flags_stretch_ratio = 3.0
 
 [node name="idhb" type="HBoxContainer" parent="sc/pc/actualEditor"]
-margin_right = 751.0
+margin_right = 739.0
 margin_bottom = 24.0
 
 [node name="l" type="Label" parent="sc/pc/actualEditor/idhb"]
@@ -93,20 +105,20 @@ text = "Plant ID"
 
 [node name="idedit" type="LineEdit" parent="sc/pc/actualEditor/idhb"]
 margin_left = 55.0
-margin_right = 692.0
+margin_right = 680.0
 margin_bottom = 24.0
 size_flags_horizontal = 3
 
 [node name="currentId" type="Label" parent="sc/pc/actualEditor/idhb"]
-margin_left = 696.0
+margin_left = 684.0
 margin_top = 5.0
-margin_right = 751.0
+margin_right = 739.0
 margin_bottom = 19.0
 text = "Current: "
 
 [node name="namehb" type="HBoxContainer" parent="sc/pc/actualEditor"]
 margin_top = 28.0
-margin_right = 751.0
+margin_right = 739.0
 margin_bottom = 52.0
 
 [node name="l" type="Label" parent="sc/pc/actualEditor/namehb"]
@@ -117,23 +129,23 @@ text = "Name"
 
 [node name="nameedit" type="LineEdit" parent="sc/pc/actualEditor/namehb"]
 margin_left = 42.0
-margin_right = 751.0
+margin_right = 739.0
 margin_bottom = 24.0
 size_flags_horizontal = 3
 
 [node name="deschb" type="VBoxContainer" parent="sc/pc/actualEditor"]
 margin_top = 56.0
-margin_right = 751.0
+margin_right = 739.0
 margin_bottom = 174.0
 
 [node name="l" type="Label" parent="sc/pc/actualEditor/deschb"]
-margin_right = 751.0
+margin_right = 739.0
 margin_bottom = 14.0
 text = "Description"
 
 [node name="descedit" type="TextEdit" parent="sc/pc/actualEditor/deschb"]
 margin_top = 18.0
-margin_right = 751.0
+margin_right = 739.0
 margin_bottom = 118.0
 rect_min_size = Vector2( 0, 100 )
 size_flags_horizontal = 3
@@ -141,7 +153,7 @@ wrap_enabled = true
 
 [node name="growthhb" type="HBoxContainer" parent="sc/pc/actualEditor"]
 margin_top = 178.0
-margin_right = 751.0
+margin_right = 739.0
 margin_bottom = 202.0
 
 [node name="l" type="Label" parent="sc/pc/actualEditor/growthhb"]
@@ -154,7 +166,7 @@ text = "Growth time (days)"
 
 [node name="dayssb" type="SpinBox" parent="sc/pc/actualEditor/growthhb"]
 margin_left = 125.0
-margin_right = 751.0
+margin_right = 739.0
 margin_bottom = 24.0
 size_flags_horizontal = 3
 value = 1.0
@@ -163,7 +175,7 @@ allow_greater = true
 
 [node name="rarityhb" type="HBoxContainer" parent="sc/pc/actualEditor"]
 margin_top = 206.0
-margin_right = 751.0
+margin_right = 739.0
 margin_bottom = 230.0
 
 [node name="l" type="Label" parent="sc/pc/actualEditor/rarityhb"]
@@ -177,7 +189,7 @@ text = "Rarity"
 
 [node name="raritysb" type="SpinBox" parent="sc/pc/actualEditor/rarityhb"]
 margin_left = 40.0
-margin_right = 751.0
+margin_right = 739.0
 margin_bottom = 24.0
 size_flags_horizontal = 3
 value = 1.0
@@ -186,7 +198,7 @@ allow_greater = true
 
 [node name="neglecthb" type="HBoxContainer" parent="sc/pc/actualEditor"]
 margin_top = 234.0
-margin_right = 751.0
+margin_right = 739.0
 margin_bottom = 258.0
 
 [node name="l" type="Label" parent="sc/pc/actualEditor/neglecthb"]
@@ -199,7 +211,7 @@ text = "Max. neglect (days)"
 
 [node name="neglectsb" type="SpinBox" parent="sc/pc/actualEditor/neglecthb"]
 margin_left = 126.0
-margin_right = 751.0
+margin_right = 739.0
 margin_bottom = 24.0
 size_flags_horizontal = 3
 value = 1.0
@@ -208,7 +220,7 @@ allow_greater = true
 
 [node name="harvestshb" type="HBoxContainer" parent="sc/pc/actualEditor"]
 margin_top = 262.0
-margin_right = 751.0
+margin_right = 739.0
 margin_bottom = 286.0
 
 [node name="l" type="Label" parent="sc/pc/actualEditor/harvestshb"]
@@ -221,7 +233,7 @@ text = "Max. harvests"
 
 [node name="harvestssb" type="SpinBox" parent="sc/pc/actualEditor/harvestshb"]
 margin_left = 92.0
-margin_right = 751.0
+margin_right = 739.0
 margin_bottom = 24.0
 size_flags_horizontal = 3
 value = 1.0
@@ -230,7 +242,7 @@ allow_greater = true
 
 [node name="cooldownhb" type="HBoxContainer" parent="sc/pc/actualEditor"]
 margin_top = 290.0
-margin_right = 751.0
+margin_right = 739.0
 margin_bottom = 314.0
 
 [node name="l" type="Label" parent="sc/pc/actualEditor/cooldownhb"]
@@ -243,7 +255,7 @@ text = "Harvest interval (days)"
 
 [node name="cooldownsb" type="SpinBox" parent="sc/pc/actualEditor/cooldownhb"]
 margin_left = 146.0
-margin_right = 751.0
+margin_right = 739.0
 margin_bottom = 24.0
 size_flags_horizontal = 3
 value = 1.0
@@ -252,80 +264,82 @@ allow_greater = true
 
 [node name="HSeparator2" type="HSeparator" parent="sc/pc/actualEditor"]
 margin_top = 318.0
-margin_right = 751.0
+margin_right = 739.0
 margin_bottom = 322.0
 
 [node name="Label2" type="Label" parent="sc/pc/actualEditor"]
 margin_top = 326.0
-margin_right = 751.0
+margin_right = 739.0
 margin_bottom = 340.0
 text = "Items"
 align = 1
 
 [node name="itemsc" type="ScrollContainer" parent="sc/pc/actualEditor"]
 margin_top = 344.0
-margin_right = 751.0
-margin_bottom = 426.0
-size_flags_vertical = 3
+margin_right = 739.0
+margin_bottom = 494.0
+rect_min_size = Vector2( 0, 150 )
 scroll_horizontal_enabled = false
 
 [node name="pc" type="PanelContainer" parent="sc/pc/actualEditor/itemsc"]
-margin_right = 751.0
-margin_bottom = 82.0
+margin_right = 739.0
+margin_bottom = 150.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 
 [node name="vb" type="VBoxContainer" parent="sc/pc/actualEditor/itemsc/pc"]
 margin_left = 7.0
 margin_top = 7.0
-margin_right = 744.0
-margin_bottom = 75.0
+margin_right = 732.0
+margin_bottom = 143.0
 
 [node name="addItem" type="Button" parent="sc/pc/actualEditor"]
-margin_top = 430.0
-margin_right = 751.0
-margin_bottom = 450.0
+margin_top = 498.0
+margin_right = 739.0
+margin_bottom = 518.0
 text = "Add Item"
 
 [node name="HSeparator" type="HSeparator" parent="sc/pc/actualEditor"]
-margin_top = 454.0
-margin_right = 751.0
-margin_bottom = 458.0
+margin_top = 522.0
+margin_right = 739.0
+margin_bottom = 526.0
 
 [node name="Label" type="Label" parent="sc/pc/actualEditor"]
-margin_top = 462.0
-margin_right = 751.0
-margin_bottom = 476.0
+margin_top = 530.0
+margin_right = 739.0
+margin_bottom = 544.0
 text = "Ingredients"
 align = 1
 
 [node name="ingsc" type="ScrollContainer" parent="sc/pc/actualEditor"]
-margin_top = 480.0
-margin_right = 751.0
-margin_bottom = 562.0
-size_flags_vertical = 3
+margin_top = 548.0
+margin_right = 739.0
+margin_bottom = 698.0
+rect_min_size = Vector2( 0, 150 )
 scroll_horizontal_enabled = false
 
 [node name="pc" type="PanelContainer" parent="sc/pc/actualEditor/ingsc"]
-margin_right = 751.0
-margin_bottom = 82.0
+margin_right = 739.0
+margin_bottom = 150.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 
 [node name="vb" type="VBoxContainer" parent="sc/pc/actualEditor/ingsc/pc"]
 margin_left = 7.0
 margin_top = 7.0
-margin_right = 744.0
-margin_bottom = 75.0
+margin_right = 732.0
+margin_bottom = 143.0
 
 [node name="addIngredient" type="Button" parent="sc/pc/actualEditor"]
-margin_top = 566.0
-margin_right = 751.0
-margin_bottom = 586.0
+margin_top = 702.0
+margin_right = 739.0
+margin_bottom = 722.0
 text = "Add Ingredient"
 
 [connection signal="pressed" from="allvb/controls/pc/vb/reload" to="." method="_on_reload_pressed"]
 [connection signal="pressed" from="allvb/controls/pc/vb/save" to="." method="saveToFile"]
+[connection signal="pressed" from="allvb/controls/pc/vb/delete" to="." method="_on_delete_pressed"]
+[connection signal="pressed" from="allvb/controls/pc/vb/create" to="." method="_on_create_pressed"]
 [connection signal="text_entered" from="sc/pc/actualEditor/idhb/idedit" to="." method="_on_idedit_text_entered"]
 [connection signal="text_changed" from="sc/pc/actualEditor/namehb/nameedit" to="." method="_on_nameedit_text_changed"]
 [connection signal="text_changed" from="sc/pc/actualEditor/deschb/descedit" to="." method="_on_descedit_text_changed"]
