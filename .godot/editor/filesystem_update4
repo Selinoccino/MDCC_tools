@@ -1,9 +1,0 @@
-res://default_env.tres
-res://main.tscn
-res://plantsEditor.gd
-res://manager.gd
-res://PlantItem.gd
-res://pathsEditor.gd
-res://plantsEditor.tscn
-res://pathsEditor.tscn
-res://main.gd
