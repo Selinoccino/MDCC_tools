@@ -6,22 +6,13 @@
 ;   [section] ; section goes between []
 ;   param=value ; assign values to parameters
 
-config_version=4
-
-_global_script_classes=[ {
-"base": "PanelContainer",
-"class": "PlantItem",
-"language": "GDScript",
-"path": "res://PlantItem.gd"
-} ]
-_global_script_class_icons={
-"PlantItem": ""
-}
+config_version=5
 
 [application]
 
 config/name="MDCC_tools"
 run/main_scene="res://main.tscn"
+config/features=PackedStringArray("4.7")
 run/low_processor_mode=true
 config/icon="res://icon.png"
 
@@ -43,4 +34,4 @@ common/enable_pause_aware_picking=true
 
 [rendering]
 
-environment/default_environment="res://default_env.tres"
+environment/defaults/default_environment="res://default_env.tres"

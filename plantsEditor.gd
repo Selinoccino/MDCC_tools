@@ -1,4 +1,4 @@
-extends HBoxContainer
+extends Control
 
 
 var cached : Dictionary = {
@@ -12,10 +12,10 @@ enum itemTypes {
 	INGREDIENT,
 }
 
-onready var editor = $sc/pc/actualEditor
-onready var plantButtons = $allvb/buttons/pc/vb
-onready var ings = $sc/pc/actualEditor/ingsc/pc/vb
-onready var items = $sc/pc/actualEditor/itemsc/pc/vb
+@onready var editor = $sc/pc/actualEditor
+@onready var plantButtons = $allvb/buttons/pc/vb
+@onready var ings = $sc/pc/actualEditor/ingsc/pc/vb
+@onready var items = $sc/pc/actualEditor/itemsc/pc/vb
 
 func populate() -> void:
 	selectPlant("")
@@ -27,42 +27,59 @@ func populate() -> void:
 
 func addPlantButton(id:String, display:String="Plant") -> void:
 	var nb := Button.new()
-	nb.text = display
+	setPlantButtonText(nb, display)
 	nb.name = id
 	plantButtons.add_child(nb)
-	nb.connect("pressed", self, "selectPlant", [id])
+	nb.connect("pressed", Callable(self, "selectPlant").bind(id))
 
-func loadFromJsonFile() -> bool:
+func safeGetPlantButton(id:String) -> Button:
+	return plantButtons.get_node_or_null(id)
+
+func setPlantButtonText(butt:Button, new_text:String) -> void:
+	butt.text = new_text if new_text else "(unnamed)"
+	butt.add_theme_color_override(&"font_color", Color.WHITE if new_text else Color.WEB_GRAY)
+
+func safeEditButtonText(id:String, new_text:String) -> Button:
+	var n = safeGetPlantButton(id)
+	if n:
+		setPlantButtonText(n, new_text)
+		return n
+	
+	return null
+	
+
+func loadFromJsonFile() -> Error:
 	var path : String = Manager.getPath("plants")
-	var f := File.new()
-	if f.open(path, File.READ)!=OK:
-		return false
+	var f := FileAccess.open(path, FileAccess.READ)
+	if !f:
+		return FileAccess.get_open_error()
 	
-	var result : JSONParseResult = JSON.parse(f.get_as_text())
+	var test_json_conv = JSON.new()
 	
-	if result.error!=OK:
+	if test_json_conv.parse(f.get_as_text())!=OK:
 		f.close()
-		return false
+		return FAILED
 	
-	var d = result.result
-	if typeof(d) != TYPE_DICTIONARY:
+	var result : Dictionary = test_json_conv.get_data()
+	
+	if typeof(result) != TYPE_DICTIONARY:
 		f.close()
-		return false
+		return FAILED
 	
-	cached = d
+	cached = result
 	f.close()
-	return true
+	return OK
 
-func saveToJsonFile() -> bool:
-	var f := File.new()
-	if f.open(Manager.getPath("plants"), File.WRITE)!=OK:
-		return false
+func saveToJsonFileAccess() -> Error:
+	var f := FileAccess.open(Manager.getPath("plants"), FileAccess.WRITE)
+	if !f:
+		return FileAccess.get_open_error()
 	
-	var p : String = JSON.print(cached, "\t")
+	var p : String = JSON.stringify(cached, "\t")
 	
 	f.store_string(p)
 	
-	return true
+	return OK
 
 func selectPlant(id:String) -> void:
 	selected = id
@@ -98,9 +115,7 @@ func _on_dayssb_value_changed(value):
 
 func _on_nameedit_text_changed(new_text):
 	setSelectedValue("name", new_text)
-	var n = plantButtons.get_node_or_null(selected)
-	if n:
-		n.text = new_text
+	safeEditButtonText(selected, new_text)
 
 func setSelectedValue(key:String, value) -> void:
 	if cached.has(selected):
@@ -144,7 +159,7 @@ func addItem(type:int=0, id:String="", amount:int=1, dorebuild:bool=true) -> voi
 	nt.setAmount(amount)
 	
 	for itemSignal in ["idChanged", "amountChanged", "deleted"]:
-		nt.connect(itemSignal, self, "rebuildSelectedItems", [type])
+		nt.connect(itemSignal, Callable(self, "rebuildSelectedItems").bind(type))
 	
 	if dorebuild:
 		rebuildSelectedItems(type)
@@ -181,11 +196,12 @@ func _on_idedit_text_entered(new_text):
 	if cached.has(selected) && nid && !cached.keys().has(nid):
 		cached[nid] = cached[selected]
 		cached.erase(selected)
-		var n = plantButtons.get_node_or_null(selected)
-		n.name = nid
-		n.text = cached[nid].get("name", "Plant")
-		n.disconnect("pressed", self, "selectPlant")
-		n.connect("pressed", self, "selectPlant", [nid])
+		var n := safeEditButtonText(selected, cached[nid].get("name",""))
+		if n:
+			n.name = nid
+			
+			n.pressed.disconnect(selectPlant)
+			n.pressed.connect(selectPlant.bind(nid))
 		
 		selectPlant(nid)
 
@@ -203,13 +219,14 @@ func _on_reload_pressed():
 	populate()
 
 func saveToFile() -> bool:
-	var f := File.new()
 	var p : String = Manager.getPath("plants")
+	var f := FileAccess.open(p, FileAccess.WRITE)
 	
-	if f.open(p, File.WRITE)!=OK:
+	
+	if !f:
 		return false
 	
-	var d : String = JSON.print(cached, "\t")
+	var d : String = JSON.stringify(cached, "\t")
 	
 	f.store_string(d)
 	f.close()
@@ -218,7 +235,7 @@ func saveToFile() -> bool:
 
 
 func _on_delete_pressed():
-	var n = plantButtons.get_node_or_null(selected)
+	var n = safeGetPlantButton(selected)
 	if n:
 		n.free()
 	
@@ -228,10 +245,11 @@ func _on_delete_pressed():
 
 func _on_create_pressed():
 	var i : int = 0
-	while "plant%s" % i in cached.keys():
+	var nid : String = "plant%s" % i
+	while nid in cached.keys():
 		i += 1
 	
-	cached["plant%s" % i] = {
+	cached[nid] = {
 		"growthTime":1,
 		"maxHarvests":1,
 		"name":"Plant",
@@ -242,6 +260,6 @@ func _on_create_pressed():
 	}
 	
 	for type in itemTypes.values():
-		cached["plant%s" % i][getItemKey(type)] = []
+		cached[nid][getItemKey(type)] = []
 	
-	addPlantButton("plant%s" % i, "Plant")
+	addPlantButton(nid, "Plant")

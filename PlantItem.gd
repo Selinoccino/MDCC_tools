@@ -23,7 +23,7 @@ func _init():
 	
 	var idedit := LineEdit.new()
 	idedit.size_flags_horizontal = Control.SIZE_EXPAND_FILL
-	idedit.connect("text_changed", self, "onIdChanged")
+	idedit.text_changed.connect(idChanged.emit)
 	idedit.placeholder_text = "ID..."
 	
 	
@@ -38,7 +38,7 @@ func _init():
 	amsb.allow_greater = true
 	amsb.set_value_no_signal(1)
 	amsb.apply()
-	amsb.connect("value_changed", self, "onAmountChanged")
+	amsb.value_changed.connect(amountChanged.emit)
 	
 	
 	idhb.add_child(l)
@@ -53,7 +53,7 @@ func _init():
 	
 	var delButton : Button = Button.new()
 	delButton.text = "Delete"
-	delButton.connect("pressed", self, "emit_signal", ["deleted"])
+	delButton.pressed.connect(deleted.emit)
 	vb.add_child(delButton)
 	
 	amountsb = amsb

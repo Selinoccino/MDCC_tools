@@ -1,6 +1,6 @@
 extends Control
 
-onready var pathc = $vb/sc/vb
+@onready var pathc = $vb/sc/vb
 
 func populatePaths() -> void:
 	for n in pathc.get_children():
@@ -23,11 +23,11 @@ func addPath(id:String, path:String) -> void:
 	ledit.text = path
 	ledit.size_flags_horizontal = Control.SIZE_EXPAND_FILL
 	
-	ledit.connect("text_changed", self, "pathEdited", [id])
+	ledit.connect("text_changed", Callable(self, "pathEdited").bind(id))
 	
 	var lbrowse := Button.new()
 	lbrowse.text = "Browse"
-	lbrowse.connect("pressed", self, "browsePath", [id])
+	lbrowse.connect("pressed", Callable(self, "browsePath").bind(id))
 	
 	
 	hb.add_child(idl)
@@ -39,7 +39,7 @@ func addPath(id:String, path:String) -> void:
 
 func browsePath(id:String) -> void:
 	$FileDialog.popup_centered_ratio()
-	var new : String = yield($FileDialog, "file_selected")
+	var new : String = await $FileDialog.file_selected
 	
 #	Manager.addPath(id, new)
 	var n = pathc.get_node_or_null(id)
@@ -52,4 +52,10 @@ func pathEdited(new_path:String, id:String) -> void:
 	Manager.saveToConfigFile()
 
 func _ready():
+	$FileDialog.use_native_dialog = Manager.getOption("nativeFiles")=="true"
+	Manager.optionsChanged.connect(onOptionsChanged)
 	populatePaths()
+
+func onOptionsChanged(option:String) -> void:
+	if option=="nativeFiles":
+		$FileDialog.use_native_dialog = Manager.getOption("nativeFiles")=="true"
