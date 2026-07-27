@@ -2,70 +2,15 @@ extends HSplitContainer
 
 var cached : Dictionary[String, Profile] = {}
 
-var selected : int = 0
-
 @onready var profsc : Tree = $left/profsTree
 
-class Field:
-	var data : Array[String] = []
-	
-	func getDataForAccessLevel(al:int=0) -> String:
-		if !data:
-			return ""
-		return data[mini(al, data.size()-1)]
-	
-	func addData(d:String) -> void:
-		data.append(d)
-	
-	func removeData(d:String) -> void:
-		data.erase(d)
-	
-	func removeDataIndex(idx:int) -> void:
-		data.remove_at(idx)
-	
-	func getData() -> Array[String]:
-		return data
-	
-	func clearData() -> void:
-		data.clear()
-	
+@onready var editor : Container = $pc/sc/editor/fields
+@onready var nonfields : Container = $pc/sc/editor/nonfields
 
-func getAllDefaultFieldTypes() -> Array[String]:
-	var r : Array[String] = [
-		"origin", "age", "inmate type", "crimes", "gender", "species", "description", "height", "weight", "detainment procs",
-	]
-	
-	return r
-
-class Profile:
-	var name : String = ""
-	var charid : String = ""
-	var inmateId : String = ""
-	var flagId : String = ""
-	var moduleId : String = ""
-	
-	var fields : Dictionary[String, Field] = {}
-	
-	func createField(id:String) -> Field:
-		var f : Field = Field.new()
-		
-		fields[id] = f
-		return f
-	
-	func removeField(id:String) -> void:
-		fields.erase(id)
-	
-	func getField(id:String) -> Field:
-		return fields.get(id, null)
-	
-	func clearFields() -> void:
-		fields.clear()
-	
 
 func newBasicProfile(id:String) -> Profile:
 	var p : Profile = Profile.new()
-	for key in getAllDefaultFieldTypes():
-		p.createField(key)
+	p.createDefaults()
 	
 	cached[id]=p
 	addProfileButton(p)
@@ -83,12 +28,76 @@ func populate() -> void:
 
 func addProfileButton(p:Profile) -> TreeItem:
 	var nb := profsc.create_item()
-	nb.set_text(0, p.name)
+	setProfButtName(nb, p.nonfields.get("name", ""))
 	
 	return nb
 
-func removeProfileId(id:String) -> void:
-	cached.erase(id)
+func getSelectedProfile() -> Profile:
+	var s : int = profsc.get_selected().get_index()
+	if s>=cached.size():
+		return null
+	
+	return cached.values()[s]
+
+func updateNonFields() -> void:
+	var p : Profile = getSelectedProfile()
+	if !p:
+		return
+	
+	for nf : String in p.nonfields.keys():
+		var newnam : String = nf.validate_node_name()
+		var n = nonfields.get_node_or_null(newnam)
+		if n:
+			n.get_child(1).text = p.nonfields[nf]
+			continue
+		
+		var nd := HBoxContainer.new()
+		nd.name = newnam
+		
+		var l := Label.new()
+		l.text = nf.capitalize()
+		
+		nd.add_child(l)
+		
+		var ledit := LineEdit.new()
+		ledit.text = p.nonfields[nf]
+		ledit.text_changed.connect(setNonfield.bind(nf))
+		ledit.size_flags_horizontal = Control.SIZE_EXPAND_FILL
+		nd.add_child(ledit)
+		
+		nonfields.add_child(nd)
+		
+
+func onProfileSelected() -> void:
+	var s : int = profsc.get_selected().get_index()
+	if s>=cached.size():
+		return
+	
+	#clearEditor()
+	
+	var pid : String = cached.keys()[s]
+	var p : Profile = cached[pid]
+	
+	for fieldid : String in p.fields.keys():
+		var newnam : String = fieldid.validate_node_name()
+		var n = editor.get_node_or_null(newnam)
+		if n && n is ProfileFieldContainer:
+			n.field = p.getField(fieldid)
+			continue
+		
+		var nd : ProfileFieldContainer = preload("res://profile_field_container.tscn").instantiate()
+		
+		nd.fold()
+		nd.name = newnam
+		nd.setLabel(fieldid.capitalize())
+		editor.add_child(nd)
+		nd.field = p.getField(fieldid)
+	
+	updateNonFields()
+
+func clearEditor() -> void:
+	for node in editor.get_children():
+		node.free()
 
 func loadFromJson(path:String=Manager.getPath("inmate_profiles")) -> void:
 	var data : Array = Manager.loadFromJsonFile(path, TYPE_ARRAY, [])
@@ -97,32 +106,53 @@ func loadFromJson(path:String=Manager.getPath("inmate_profiles")) -> void:
 	cached.clear()
 	for rawp in data:
 		if rawp.has("charid"):
-			cached[rawp["charid"]] = dict2prof(rawp)
+			cached[rawp["charid"]] = Profile.dict2prof(rawp)
 		else:
-			cached["prof%s" % unki] = dict2prof(rawp)
+			cached["prof%s" % unki] = Profile.dict2prof(rawp)
 			unki += 1
 	
 	populate()
 
-func dict2prof(dict:Dictionary) -> Profile:
-	var p : Profile = Profile.new()
-	for key in getAllDefaultFieldTypes():
-		var data = dict.get(key, [])
-		if typeof(data)==TYPE_ARRAY:
-			for x in data:
-				p.createField(key).addData(x)
-		else:
-			p.createField(key).addData(data)
-	
-	
-	p.name = dict.get("name", "")
-	p.moduleId = dict.get("module id", "")
-	p.flagId = dict.get("flag id", "")
-	p.charid = dict.get("charid", "")
-	p.inmateId = dict.get("name", "inmate id")
-	
-	return p
 
-func _ready() -> void:
-	Manager.addPath("inmate_profiles", "user://InmateProfiles.json")
+func _on_add_pressed() -> void:
+	newBasicProfile("prof%s" % profsc.get_child_count())
+
+func setProfButtName(pb:TreeItem, n:String) -> void:
+	pb.set_custom_color(0, Color.WHITE if n else Color.WEB_GRAY)
+	pb.set_text(0, n if n else "(unnamed)")
+
+func setNonfield(new:String, nf:String) -> void:
+	var p : Profile = getSelectedProfile()
+	if p:
+		p.setNonField(nf, new)
+	
+	if nf=="name":
+		var s = profsc.get_selected()
+		setProfButtName(s, new)
+
+func deleteSelected() -> void:
+	var pb = profsc.get_selected()
+	cached.erase(cached.keys()[pb.get_index()])
+	pb.free()
+
+
+func _on_reload_pressed() -> void:
 	loadFromJson()
+	populate()
+
+func saveToJson(path:String=Manager.getPath("inmate_profiles")) -> void:
+	var f := FileAccess.open(path, FileAccess.WRITE)
+	if !f:
+		return
+	
+	var far : Array = []
+	for profile in cached.values():
+		far.append(Profile.prof2dict(profile))
+	
+	var finald : String = JSON.stringify(far, "\t")
+	
+	f.store_string(finald)
+
+
+func _on_save_pressed() -> void:
+	saveToJson()

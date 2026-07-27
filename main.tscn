@@ -3,6 +3,7 @@
 [ext_resource type="PackedScene" uid="uid://ckebrpxcvpayq" path="res://plantsEditor.tscn" id="1"]
 [ext_resource type="PackedScene" uid="uid://by0uapcuohwwn" path="res://pathsEditor.tscn" id="2"]
 [ext_resource type="Script" uid="uid://dn086vuuk6x7v" path="res://main.gd" id="3"]
+[ext_resource type="PackedScene" uid="uid://bdsbryl1ms02o" path="res://profiles_editor.tscn" id="4_1bvp3"]
 
 [node name="main" type="Control" unique_id=404694261]
 layout_mode = 3
@@ -14,6 +15,7 @@ grow_vertical = 2
 script = ExtResource("3")
 
 [node name="ColorRect" type="ColorRect" parent="." unique_id=2082855885]
+visible = false
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -50,3 +52,8 @@ vertical_alignment = 2
 visible = false
 layout_mode = 2
 metadata/_tab_index = 1
+
+[node name="profilesEditor" parent="tabs" unique_id=22526534 instance=ExtResource("4_1bvp3")]
+visible = false
+layout_mode = 2
+metadata/_tab_index = 2

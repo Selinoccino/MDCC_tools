@@ -1,0 +1,32 @@
+[gd_scene format=3 uid="uid://dcecckpvh8qom"]
+
+[ext_resource type="Script" uid="uid://df2xbh0bydgr3" path="res://profile_field_container.gd" id="1_7xp8e"]
+
+[node name="profileFieldContainer" type="FoldableContainer" unique_id=147929305]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+title_alignment = 1
+script = ExtResource("1_7xp8e")
+
+[node name="vb" type="VBoxContainer" parent="." unique_id=412054245]
+layout_mode = 2
+
+[node name="vb" type="VBoxContainer" parent="vb" unique_id=1811076575]
+layout_mode = 2
+theme_override_constants/separation = 8
+
+[node name="MarginContainer" type="MarginContainer" parent="vb" unique_id=1282351981]
+custom_minimum_size = Vector2(0, 15)
+layout_mode = 2
+
+[node name="HSeparator" type="HSeparator" parent="vb" unique_id=672300757]
+layout_mode = 2
+
+[node name="add" type="Button" parent="vb" unique_id=913043525]
+layout_mode = 2
+text = "Add data"
+
+[connection signal="pressed" from="vb/add" to="." method="_on_add_pressed"]

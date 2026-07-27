@@ -10,3 +10,4 @@ extends Control
 func _ready():
 	$tabs.set_tab_title(0, "Options")
 	$tabs.set_tab_title(1, "Plant Editor")
+	$tabs.set_tab_title(2, "Profile Editor")
