@@ -43,7 +43,7 @@ func displayData() -> void:
 		addData(d)
 
 func addData(d:String) -> void:
-	var vb := VBoxContainer.new()
+	var vb := HBoxContainer.new()
 	
 	var nl = TextEdit.new()
 	nl.scroll_fit_content_height = true
@@ -55,7 +55,7 @@ func addData(d:String) -> void:
 	
 	nl.placeholder_text = "Data..."
 	nl.text = d
-	#nl.size_flags_horizontal = Control.SIZE_EXPAND_FILL
+	nl.size_flags_horizontal = Control.SIZE_EXPAND_FILL
 	nl.size_flags_vertical = Control.SIZE_EXPAND_FILL
 	nl.text_changed.connect(dataChanged.bind(datac.get_child_count(), nl))
 	
@@ -63,21 +63,20 @@ func addData(d:String) -> void:
 	nb.text = "Delete"
 	nb.pressed.connect(field.removeData.bind(d))
 	
-	vb.add_child(nl)
-	vb.add_child(nb)
+	
 	vb.size_flags_horizontal = Control.SIZE_EXPAND_FILL
 	vb.size_flags_vertical = Control.SIZE_EXPAND_FILL
 	
-	var hb := HBoxContainer.new()
 	var l2 := Label.new()
-	l2.text = str(datac.get_child_count())
+	l2.text = "AL%s" % datac.get_child_count()
+	l2.tooltip_text = "Access level: %s" % datac.get_child_count()
+	l2.mouse_filter = Control.MOUSE_FILTER_STOP
 	
-	hb.size_flags_horizontal = Control.SIZE_EXPAND_FILL
-	hb.size_flags_vertical = Control.SIZE_EXPAND_FILL
-	hb.add_child(l2)
-	hb.add_child(vb)
+	vb.add_child(l2)
+	vb.add_child(nl)
+	vb.add_child(nb)
 	
-	datac.add_child(hb)
+	datac.add_child(vb)
 
 func clearDataDisplay() -> void:
 	for node in datac.get_children():
