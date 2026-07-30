@@ -25,7 +25,7 @@ func createDefaults() -> void:
 
 static func getAllDefaultFieldTypes() -> Array[String]:
 	var r : Array[String] = [
-			"origin", "age", "inmate type", "crimes", "gender", "species", "description", "height", "weight", "detainment procs",
+			"origin", "age", "inmate type", "crimes", "gender", "anatomy", "species", "description", "height", "weight", "detainment procs",
 		]
 	
 	return r

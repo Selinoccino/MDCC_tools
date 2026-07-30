@@ -83,7 +83,13 @@ func onProfileSelected() -> void:
 	var pid : String = cached.keys()[s]
 	var p : Profile = cached[pid]
 	
-	for fieldid : String in p.fields.keys():
+	var fields = p.fields.keys()
+	for default in Profile.getAllDefaultFieldTypes():
+		if default in fields:
+			continue
+		fields.append(default)
+	
+	for fieldid : String in fields:
 		var newnam : String = fieldid.validate_node_name()
 		var n = editor.get_node_or_null(newnam)
 		if n && n is ProfileFieldContainer:
@@ -96,7 +102,10 @@ func onProfileSelected() -> void:
 		nd.name = newnam
 		nd.setLabel(fieldid.capitalize())
 		editor.add_child(nd)
-		nd.field = p.getField(fieldid)
+		var f = p.getField(fieldid)
+		if !f:
+			f = p.createField(fieldid)
+		nd.field = f
 	
 	updateNonFields()
 
