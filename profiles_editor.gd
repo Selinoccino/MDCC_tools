@@ -33,7 +33,12 @@ func addProfileButton(p:Profile) -> TreeItem:
 	return nb
 
 func getSelectedProfile() -> Profile:
-	var s : int = profsc.get_selected().get_index()
+	var sel = profsc.get_selected()
+	
+	if !sel:
+		return null
+	
+	var s : int = sel.get_index()
 	if s>=cached.size():
 		return null
 	
@@ -105,8 +110,8 @@ func loadFromJson(path:String=Manager.getPath("inmate_profiles")) -> void:
 	var unki : int = 0
 	cached.clear()
 	for rawp in data:
-		if rawp.has("charid"):
-			cached[rawp["charid"]] = Profile.dict2prof(rawp)
+		if rawp.has("inmate id"):
+			cached[rawp["inmate id"]] = Profile.dict2prof(rawp)
 		else:
 			cached["prof%s" % unki] = Profile.dict2prof(rawp)
 			unki += 1
@@ -115,7 +120,7 @@ func loadFromJson(path:String=Manager.getPath("inmate_profiles")) -> void:
 
 
 func _on_add_pressed() -> void:
-	newBasicProfile("prof%s" % profsc.get_child_count())
+	newBasicProfile("prof%s" % profsc.get_root().get_child_count())
 
 func setProfButtName(pb:TreeItem, n:String) -> void:
 	pb.set_custom_color(0, Color.WHITE if n else Color.WEB_GRAY)
@@ -138,7 +143,7 @@ func deleteSelected() -> void:
 
 func _on_reload_pressed() -> void:
 	loadFromJson()
-	populate()
+	#populate()
 
 func saveToJson(path:String=Manager.getPath("inmate_profiles")) -> void:
 	var f := FileAccess.open(path, FileAccess.WRITE)
@@ -153,6 +158,20 @@ func saveToJson(path:String=Manager.getPath("inmate_profiles")) -> void:
 	
 	f.store_string(finald)
 
+func _ready() -> void:
+	populate()
 
 func _on_save_pressed() -> void:
 	saveToJson()
+
+
+func _on_copy_pressed() -> void:
+	var sel : Profile = getSelectedProfile()
+	if !sel:
+		return
+	
+	var p = Profile.dict2prof(Profile.prof2dict(sel))
+	var nid = "prof%s" % profsc.get_root().get_child_count()
+	p.setNonField("charid", nid)
+	cached[nid] = p
+	addProfileButton(p)

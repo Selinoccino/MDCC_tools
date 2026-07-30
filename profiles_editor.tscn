@@ -35,6 +35,10 @@ size_flags_vertical = 3
 layout_mode = 2
 text = "Delete selected"
 
+[node name="copy" type="Button" parent="left/controlsfc/vb" unique_id=581087990]
+layout_mode = 2
+text = "Copy selected"
+
 [node name="add" type="Button" parent="left/controlsfc/vb" unique_id=1133895807]
 layout_mode = 2
 text = "Add profile"
@@ -89,6 +93,7 @@ size_flags_vertical = 3
 
 [connection signal="item_selected" from="left/profsTree" to="." method="onProfileSelected"]
 [connection signal="pressed" from="left/controlsfc/vb/delete" to="." method="deleteSelected"]
+[connection signal="pressed" from="left/controlsfc/vb/copy" to="." method="_on_copy_pressed"]
 [connection signal="pressed" from="left/controlsfc/vb/add" to="." method="_on_add_pressed"]
 [connection signal="pressed" from="left/controlsfc/vb/reload" to="." method="_on_reload_pressed"]
 [connection signal="pressed" from="left/controlsfc/vb/save" to="." method="_on_save_pressed"]
