@@ -61,7 +61,7 @@ func addData(d:String) -> void:
 	
 	var nb := Button.new()
 	nb.text = "Delete"
-	nb.pressed.connect(field.removeData.bind(d))
+	nb.pressed.connect(onDeletePressed.bind(nl))
 	
 	
 	vb.size_flags_horizontal = Control.SIZE_EXPAND_FILL
@@ -87,6 +87,9 @@ func setLabel(t:String) -> void:
 
 func dataChanged(idx:int, tl:TextEdit) -> void:
 	field.setData(idx, tl.text)
+
+func onDeletePressed(tedit:TextEdit) -> void:
+	field.removeData(tedit.text)
 
 func _on_add_pressed() -> void:
 	#addData("")
