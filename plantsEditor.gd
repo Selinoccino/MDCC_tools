@@ -106,6 +106,8 @@ func updateEditor() -> void:
 	
 	getEditorElement("rarityhb/raritysb").value = int(getSelectedValue("rarity", 1))
 	
+	getEditorElement("plantablehb/plantableButton").button_pressed = bool(getSelectedValue("plantable", true))
+	
 	for type in itemTypes.values():
 		populateItems(type)
 
@@ -257,9 +259,14 @@ func _on_create_pressed():
 		"maxUnwateredLifespan":1,
 		"harvestingCooldown":1,
 		"rarity":1,
+		"plantable": true,
 	}
 	
 	for type in itemTypes.values():
 		cached[nid][getItemKey(type)] = []
 	
 	addPlantButton(nid, "Plant")
+
+
+func _on_plantable_button_toggled(toggled_on: bool) -> void:
+	setSelectedValue("plantable", toggled_on)

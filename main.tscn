@@ -29,6 +29,8 @@ layout_mode = 0
 anchor_right = 1.0
 anchor_bottom = 1.0
 current_tab = 0
+tab_1/title = "Plants Editor"
+tab_2/title = "Profiles Editor"
 
 [node name="Options" type="PanelContainer" parent="tabs" unique_id=1874690570]
 layout_mode = 2
@@ -52,8 +54,10 @@ vertical_alignment = 2
 visible = false
 layout_mode = 2
 metadata/_tab_index = 1
+metadata/_tab_name = "Plants Editor"
 
 [node name="profilesEditor" parent="tabs" unique_id=22526534 instance=ExtResource("4_1bvp3")]
 visible = false
 layout_mode = 2
 metadata/_tab_index = 2
+metadata/_tab_name = "Profiles Editor"

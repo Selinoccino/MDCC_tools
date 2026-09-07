@@ -187,6 +187,20 @@ value = 1.0
 rounded = true
 allow_greater = true
 
+[node name="plantablehb" type="HBoxContainer" parent="sc/pc/actualEditor" unique_id=1273455462]
+layout_mode = 2
+
+[node name="l" type="Label" parent="sc/pc/actualEditor/plantablehb" unique_id=281543763]
+layout_mode = 2
+tooltip_text = "Days between harvests"
+mouse_filter = 0
+text = "Plantable"
+
+[node name="plantableButton" type="CheckBox" parent="sc/pc/actualEditor/plantablehb" unique_id=722420304]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Is it?"
+
 [node name="HSeparator2" type="HSeparator" parent="sc/pc/actualEditor" unique_id=1718985859]
 layout_mode = 2
 
@@ -247,5 +261,6 @@ text = "Add Ingredient"
 [connection signal="value_changed" from="sc/pc/actualEditor/neglecthb/neglectsb" to="." method="_on_neglectsb_value_changed"]
 [connection signal="value_changed" from="sc/pc/actualEditor/harvestshb/harvestssb" to="." method="_on_harvestssb_value_changed"]
 [connection signal="value_changed" from="sc/pc/actualEditor/cooldownhb/cooldownsb" to="." method="_on_cooldownsb_value_changed"]
+[connection signal="toggled" from="sc/pc/actualEditor/plantablehb/plantableButton" to="." method="_on_plantable_button_toggled"]
 [connection signal="pressed" from="sc/pc/actualEditor/addItem" to="." method="_on_addItem_pressed"]
 [connection signal="pressed" from="sc/pc/actualEditor/addIngredient" to="." method="_on_addIngredient_pressed"]
