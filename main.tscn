@@ -3,7 +3,8 @@
 [ext_resource type="PackedScene" uid="uid://ckebrpxcvpayq" path="res://plantsEditor.tscn" id="1"]
 [ext_resource type="PackedScene" uid="uid://by0uapcuohwwn" path="res://pathsEditor.tscn" id="2"]
 [ext_resource type="Script" uid="uid://dn086vuuk6x7v" path="res://main.gd" id="3"]
-[ext_resource type="PackedScene" uid="uid://bdsbryl1ms02o" path="res://profiles_editor.tscn" id="4_1bvp3"]
+[ext_resource type="PackedScene" uid="uid://bdsbryl1ms02o" path="res://profiles/profiles_editor.tscn" id="4_1bvp3"]
+[ext_resource type="PackedScene" uid="uid://d1xou0sovsels" path="res://recipes/recipes_editor.tscn" id="5_lquwl"]
 
 [node name="main" type="Control" unique_id=404694261]
 layout_mode = 3
@@ -31,6 +32,7 @@ anchor_bottom = 1.0
 current_tab = 0
 tab_1/title = "Plants Editor"
 tab_2/title = "Profiles Editor"
+tab_3/title = "Recipes Editor"
 
 [node name="Options" type="PanelContainer" parent="tabs" unique_id=1874690570]
 layout_mode = 2
@@ -61,3 +63,9 @@ visible = false
 layout_mode = 2
 metadata/_tab_index = 2
 metadata/_tab_name = "Profiles Editor"
+
+[node name="recipesEditor" parent="tabs" unique_id=133412599 instance=ExtResource("5_lquwl")]
+visible = false
+layout_mode = 2
+metadata/_tab_index = 3
+metadata/_tab_name = "Recipes Editor"

@@ -1,0 +1,9 @@
+[gd_scene format=3 uid="uid://bquxlltmccbjq"]
+
+[ext_resource type="PackedScene" uid="uid://c205gdoqolf3l" path="res://recipes/required_thing_container.tscn" id="1_sk6kc"]
+[ext_resource type="Script" uid="uid://bm3osaksno4lj" path="res://recipes/resulting_item_container.gd" id="2_8sdq7"]
+[ext_resource type="PackedScene" uid="uid://bj0i00apuyntq" path="res://recipes/resulting_item_entry.tscn" id="2_fpe1f"]
+
+[node name="ResultingItemContainer" unique_id=1566414259 instance=ExtResource("1_sk6kc")]
+script = ExtResource("2_8sdq7")
+entryScene = ExtResource("2_fpe1f")

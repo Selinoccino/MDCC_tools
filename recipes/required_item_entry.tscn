@@ -1,0 +1,8 @@
+[gd_scene format=3 uid="uid://kvlq72yr8288"]
+
+[ext_resource type="PackedScene" uid="uid://quq5esuhwde0" path="res://recipes/required_ingredient_entry.tscn" id="1_yeu2q"]
+
+[node name="RequiredItemEntry" unique_id=58674808 instance=ExtResource("1_yeu2q")]
+
+[node name="idEdit" parent="." index="0" unique_id=1841177812]
+placeholder_text = "Item ID..."

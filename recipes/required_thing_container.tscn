@@ -1,0 +1,23 @@
+[gd_scene format=3 uid="uid://c205gdoqolf3l"]
+
+[ext_resource type="Script" uid="uid://oqlg148wtasf" path="res://recipes/required_thing_container.gd" id="1_rtt1v"]
+
+[node name="RequiredThingContainer" type="VBoxContainer" unique_id=1566414259]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_vertical = 3
+script = ExtResource("1_rtt1v")
+
+[node name="vb" type="VBoxContainer" parent="." unique_id=309142595]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="addButton" type="Button" parent="." unique_id=2094888880]
+layout_mode = 2
+text = "Add new"
+
+[connection signal="pressed" from="addButton" to="." method="addNew"]

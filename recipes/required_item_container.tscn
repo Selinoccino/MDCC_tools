@@ -1,0 +1,9 @@
+[gd_scene format=3 uid="uid://ijlx5iud0oe7"]
+
+[ext_resource type="PackedScene" uid="uid://c205gdoqolf3l" path="res://recipes/required_thing_container.tscn" id="1_65gij"]
+[ext_resource type="Script" uid="uid://rerfb46uhocx" path="res://required_item_container.gd" id="2_jt4ie"]
+[ext_resource type="PackedScene" uid="uid://kvlq72yr8288" path="res://recipes/required_item_entry.tscn" id="3_tm3pk"]
+
+[node name="RequiredItemContainer" unique_id=1566414259 instance=ExtResource("1_65gij")]
+script = ExtResource("2_jt4ie")
+entryScene = ExtResource("3_tm3pk")

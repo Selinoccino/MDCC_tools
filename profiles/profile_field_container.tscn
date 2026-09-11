@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://dcecckpvh8qom"]
 
-[ext_resource type="Script" uid="uid://df2xbh0bydgr3" path="res://profile_field_container.gd" id="1_7xp8e"]
+[ext_resource type="Script" uid="uid://df2xbh0bydgr3" path="res://profiles/profile_field_container.gd" id="1_7xp8e"]
 
 [node name="profileFieldContainer" type="FoldableContainer" unique_id=147929305]
 anchors_preset = 15

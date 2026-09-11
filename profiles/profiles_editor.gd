@@ -96,7 +96,7 @@ func onProfileSelected() -> void:
 			n.field = p.getField(fieldid)
 			continue
 		
-		var nd : ProfileFieldContainer = preload("res://profile_field_container.tscn").instantiate()
+		var nd : ProfileFieldContainer = preload("res://profiles/profile_field_container.tscn").instantiate()
 		
 		nd.fold()
 		nd.name = newnam

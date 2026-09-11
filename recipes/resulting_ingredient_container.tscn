@@ -1,0 +1,7 @@
+[gd_scene format=3 uid="uid://2uj63vggq77y"]
+
+[ext_resource type="PackedScene" uid="uid://bquxlltmccbjq" path="res://recipes/resulting_item_container.tscn" id="1_5haqr"]
+[ext_resource type="PackedScene" uid="uid://dv1p1jy1p64gh" path="res://recipes/resulting_ingredient_entry.tscn" id="2_22mov"]
+
+[node name="ResultingIngredientContainer" unique_id=1566414259 instance=ExtResource("1_5haqr")]
+entryScene = ExtResource("2_22mov")

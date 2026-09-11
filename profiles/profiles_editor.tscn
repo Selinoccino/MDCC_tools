@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://bdsbryl1ms02o"]
 
-[ext_resource type="Script" uid="uid://cw0xynmtfms0i" path="res://profiles_editor.gd" id="1_ihgve"]
+[ext_resource type="Script" uid="uid://cw0xynmtfms0i" path="res://profiles/profiles_editor.gd" id="1_ihgve"]
 
 [node name="profilesEditor" type="HSplitContainer" unique_id=22526534]
 anchors_preset = 15

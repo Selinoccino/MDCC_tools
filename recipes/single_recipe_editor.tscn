@@ -1,0 +1,162 @@
+[gd_scene format=3 uid="uid://cs3h211e0v0hy"]
+
+[ext_resource type="Script" uid="uid://dg4kvyqcrlawc" path="res://recipes/single_recipe_editor.gd" id="1_7vogi"]
+[ext_resource type="PackedScene" uid="uid://gglgly8vln3d" path="res://recipes/required_ingredient_container.tscn" id="2_24r6y"]
+[ext_resource type="PackedScene" uid="uid://ijlx5iud0oe7" path="res://recipes/required_item_container.tscn" id="2_aeyre"]
+[ext_resource type="PackedScene" uid="uid://bquxlltmccbjq" path="res://recipes/resulting_item_container.tscn" id="4_8lnyy"]
+[ext_resource type="PackedScene" uid="uid://2uj63vggq77y" path="res://recipes/resulting_ingredient_container.tscn" id="5_8lnyy"]
+
+[node name="singleRecipeEditor" type="PanelContainer" unique_id=1754334379]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_7vogi")
+
+[node name="sc" type="ScrollContainer" parent="." unique_id=1107556734]
+layout_mode = 2
+
+[node name="vb" type="VBoxContainer" parent="sc" unique_id=1937134220]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="idHB" type="HBoxContainer" parent="sc/vb" unique_id=1013443019]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="sc/vb/idHB" unique_id=517677185]
+layout_mode = 2
+text = "Recipe ID"
+
+[node name="idedit" type="LineEdit" parent="sc/vb/idHB" unique_id=194481502]
+layout_mode = 2
+size_flags_horizontal = 3
+placeholder_text = "ID..."
+
+[node name="nameHB" type="HBoxContainer" parent="sc/vb" unique_id=436639885]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="sc/vb/nameHB" unique_id=1058579706]
+layout_mode = 2
+text = "Display Name"
+
+[node name="nameEdit" type="LineEdit" parent="sc/vb/nameHB" unique_id=1058719568]
+layout_mode = 2
+size_flags_horizontal = 3
+placeholder_text = "Display name..."
+
+[node name="itemDisplayHB" type="HBoxContainer" parent="sc/vb" unique_id=1830028711]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="sc/vb/itemDisplayHB" unique_id=912966025]
+layout_mode = 2
+tooltip_text = "Resulting items will show this text instead, if not empty"
+mouse_filter = 0
+text = "Items Display"
+
+[node name="itemEdit" type="TextEdit" parent="sc/vb/itemDisplayHB" unique_id=503336007]
+custom_minimum_size = Vector2(0, 60)
+layout_mode = 2
+size_flags_horizontal = 3
+placeholder_text = "Text..."
+wrap_mode = 1
+
+[node name="ingDisplayHB" type="HBoxContainer" parent="sc/vb" unique_id=1915522903]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="sc/vb/ingDisplayHB" unique_id=2001974332]
+layout_mode = 2
+tooltip_text = "Resulting ingredients will show this text instead, if not empty"
+mouse_filter = 0
+text = "Ingredient Display"
+
+[node name="ingEdit" type="TextEdit" parent="sc/vb/ingDisplayHB" unique_id=1234198767]
+custom_minimum_size = Vector2(0, 60)
+layout_mode = 2
+size_flags_horizontal = 3
+placeholder_text = "Text..."
+wrap_mode = 1
+
+[node name="craftCallHB" type="HBoxContainer" parent="sc/vb" unique_id=1632455496]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="sc/vb/craftCallHB" unique_id=294909314]
+layout_mode = 2
+text = "Craft Callback"
+
+[node name="craftEdit" type="LineEdit" parent="sc/vb/craftCallHB" unique_id=1872869375]
+layout_mode = 2
+size_flags_horizontal = 3
+placeholder_text = "ModuleID.method..."
+
+[node name="qualityCallHB" type="HBoxContainer" parent="sc/vb" unique_id=2145876464]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="sc/vb/qualityCallHB" unique_id=920186651]
+layout_mode = 2
+text = "Quality Callback"
+
+[node name="qualityEdit" type="LineEdit" parent="sc/vb/qualityCallHB" unique_id=1784396427]
+layout_mode = 2
+size_flags_horizontal = 3
+placeholder_text = "ModuleID.method..."
+
+[node name="tagsHB" type="HBoxContainer" parent="sc/vb" unique_id=1736546049]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="sc/vb/tagsHB" unique_id=893078740]
+layout_mode = 2
+tooltip_text = "Separated with newlines"
+mouse_filter = 0
+text = "Tags"
+
+[node name="tagsEdit" type="TextEdit" parent="sc/vb/tagsHB" unique_id=1014945008]
+custom_minimum_size = Vector2(0, 80)
+layout_mode = 2
+size_flags_horizontal = 3
+placeholder_text = "Tags..."
+wrap_mode = 1
+
+[node name="HSeparator" type="HSeparator" parent="sc/vb" unique_id=897099066]
+layout_mode = 2
+
+[node name="reqItems" type="FoldableContainer" parent="sc/vb" unique_id=1848038858]
+layout_mode = 2
+folded = true
+title = "Required Items"
+
+[node name="RequiredItemContainer" parent="sc/vb/reqItems" unique_id=1566414259 instance=ExtResource("2_aeyre")]
+visible = false
+layout_mode = 2
+size_flags_vertical = 1
+
+[node name="reqIngs" type="FoldableContainer" parent="sc/vb" unique_id=1767060956]
+layout_mode = 2
+title = "Required Ingredients"
+
+[node name="RequiredIngredientContainer" parent="sc/vb/reqIngs" unique_id=401146703 instance=ExtResource("2_24r6y")]
+layout_mode = 2
+size_flags_vertical = 1
+
+[node name="resItems" type="FoldableContainer" parent="sc/vb" unique_id=1884453577]
+layout_mode = 2
+folded = true
+title = "Resulting Items"
+
+[node name="ResultingItemContainer" parent="sc/vb/resItems" unique_id=2127849113 instance=ExtResource("4_8lnyy")]
+visible = false
+layout_mode = 2
+size_flags_vertical = 1
+
+[node name="resIngs" type="FoldableContainer" parent="sc/vb" unique_id=856593026]
+layout_mode = 2
+folded = true
+title = "Resulting Ingredients"
+
+[node name="ResultingIngredientContainer" parent="sc/vb/resIngs" unique_id=1427911743 instance=ExtResource("5_8lnyy")]
+visible = false
+layout_mode = 2
+size_flags_vertical = 1
+
+[connection signal="text_submitted" from="sc/vb/idHB/idedit" to="." method="_on_idedit_text_submitted"]
