@@ -1,8 +1,9 @@
-[gd_scene format=2]
+[gd_scene format=3 uid="uid://duh6hn5fnetcm"]
 
 [ext_resource type="Script" uid="uid://vu128ds3olbt" path="res://plants/PlantItem.gd" id="1"]
 
-[node name="PlantItem" type="PanelContainer"]
+[node name="PlantItem" type="PanelContainer" unique_id=325022270]
+anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
-script = ExtResource( 1 )
+script = ExtResource("1")

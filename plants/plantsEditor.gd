@@ -169,8 +169,9 @@ func addItem(type:int=0, id:String="", amount:int=1, dorebuild:bool=true) -> voi
 	nt.setId(id)
 	nt.setAmount(amount)
 	
-	for itemSignal in ["idChanged", "amountChanged", "deleted"]:
-		nt.connect(itemSignal, Callable(self, "rebuildSelectedItems").bind(type))
+	
+	nt.deleted.connect(nt.queue_free)
+	nt.needsUpdate.connect(rebuildSelectedItems.bind(type))
 	
 	if dorebuild:
 		rebuildSelectedItems(type)

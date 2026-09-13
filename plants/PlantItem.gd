@@ -4,6 +4,7 @@ class_name PlantItem
 signal idChanged
 signal amountChanged
 signal deleted
+signal needsUpdate
 
 var amountsb : SpinBox
 var idEdit : LineEdit
@@ -61,6 +62,10 @@ func _init():
 	
 	add_child(vb)
 	
+	amountChanged.connect(needsUpdate.emit.unbind(1))
+	idChanged.connect(needsUpdate.emit.unbind(1))
+	deleted.connect(needsUpdate.emit)
+	
 
 func setAmount(new:int) -> void:
 	amountsb.set_value_no_signal(new)
@@ -73,10 +78,3 @@ func getId() -> String:
 
 func setId(new:String) -> void:
 	idEdit.text = new
-
-
-func onIdChanged(_new_id:String) -> void:
-	emit_signal("idChanged")
-
-func onAmountChanged(_new) -> void:
-	emit_signal("amountChanged")
