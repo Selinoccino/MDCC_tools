@@ -70,12 +70,21 @@ func loadFromJsonFile() -> Error:
 	f.close()
 	return OK
 
+func getPureCached() -> Dictionary:
+	var pc : Dictionary = cached
+	for id in cached.keys():
+		for key in cached[id].keys():
+			if !key && typeof(key)!=TYPE_BOOL:
+				cached[id].erase(key)
+	
+	return cached
+
 func saveToJsonFileAccess() -> Error:
 	var f := FileAccess.open(Manager.getPath("plants"), FileAccess.WRITE)
 	if !f:
 		return FileAccess.get_open_error()
 	
-	var p : String = JSON.stringify(cached, "\t")
+	var p : String = JSON.stringify(getPureCached(), "\t")
 	
 	f.store_string(p)
 	
@@ -228,7 +237,7 @@ func saveToFile() -> bool:
 	if !f:
 		return false
 	
-	var d : String = JSON.stringify(cached, "\t")
+	var d : String = JSON.stringify(getPureCached(), "\t")
 	
 	f.store_string(d)
 	f.close()

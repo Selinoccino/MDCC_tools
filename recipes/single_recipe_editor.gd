@@ -38,4 +38,8 @@ func updateDictionary() -> Dictionary:
 	recipe["resultingIngredients"] = $sc/vb/resIngs/ResultingIngredientContainer.getValue()
 	recipe["resultingItems"] = $sc/vb/resItems/ResultingItemContainer.getValue()
 	
+	for key in recipe.keys():
+		if !recipe[key] && typeof(recipe[key])!=TYPE_BOOL:
+			recipe.erase(key)
+	
 	return recipe

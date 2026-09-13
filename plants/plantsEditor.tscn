@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://ckebrpxcvpayq"]
 
-[ext_resource type="Script" uid="uid://cchovensqo2y4" path="res://plantsEditor.gd" id="1"]
+[ext_resource type="Script" uid="uid://cchovensqo2y4" path="res://plants/plantsEditor.gd" id="1"]
 
 [node name="plantsEditor" type="HSplitContainer" unique_id=766048540]
 anchors_preset = 15
@@ -105,6 +105,7 @@ text = "Description"
 custom_minimum_size = Vector2(0, 100)
 layout_mode = 2
 size_flags_horizontal = 3
+wrap_mode = 1
 
 [node name="growthhb" type="HBoxContainer" parent="sc/pc/actualEditor" unique_id=1913940900]
 layout_mode = 2
