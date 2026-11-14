@@ -71,7 +71,7 @@ func loadFromJsonFile() -> Error:
 	return OK
 
 func getPureCached() -> Dictionary:
-	var pc : Dictionary = cached
+	#var pc : Dictionary = cached
 	for id in cached.keys():
 		for key in cached[id].keys():
 			if !key && typeof(key)!=TYPE_BOOL:
@@ -107,11 +107,11 @@ func updateEditor() -> void:
 	
 	getEditorElement("growthhb/dayssb").value = int(getSelectedValue("growthTime", 1))
 	
-	getEditorElement("neglecthb/neglectsb").value = int(getSelectedValue("maxUnwateredLifespan", 1))
+	getEditorElement("neglecthb/neglectsb").value = int(getSelectedValue("maxNeglect", 1))
 	
 	getEditorElement("harvestshb/harvestssb").value = int(getSelectedValue("maxHarvests", 1))
 	
-	getEditorElement("cooldownhb/cooldownsb").value = int(getSelectedValue("harvestingCooldown", 1))
+	getEditorElement("cooldownhb/cooldownsb").value = int(getSelectedValue("harvestInterval", 1))
 	
 	getEditorElement("rarityhb/raritysb").value = int(getSelectedValue("rarity", 1))
 	
@@ -146,7 +146,7 @@ func _on_raritysb_value_changed(value):
 	
 
 func _on_neglectsb_value_changed(value):
-	setSelectedValue("maxUnwateredLifespan", int(value))
+	setSelectedValue("maxNeglect", int(value))
 
 
 func _on_harvestssb_value_changed(value):
@@ -154,7 +154,7 @@ func _on_harvestssb_value_changed(value):
 
 
 func _on_cooldownsb_value_changed(value):
-	setSelectedValue("harvestingCooldown", int(value))
+	setSelectedValue("harvestInterval", int(value))
 
 func getItemContainer(type:int=0) -> Container:
 	return ings if type==itemTypes.INGREDIENT else items
@@ -183,25 +183,23 @@ func rebuildSelectedItems(type:int=0) -> void:
 	var c := getItemContainer(type)
 	var key : String = getItemKey(type)
 	
-	var newval : Array = []
+	var newval : Dictionary = {}
 	
 	for plantitem in c.get_children():
 		if plantitem is PlantItem:
-			newval.append([
-				plantitem.getId(), plantitem.getAmount()
-			])
+			newval[plantitem.getId()] = plantitem.getAmount()
 	
 	setSelectedValue(key, newval)
 	
 
 func populateItems(type:int=0) -> void:
 	clearItemContainer(type)
-	for itemEntry in getSelectedValue(getItemKey(type), []):
-		if typeof(itemEntry)!=TYPE_ARRAY or itemEntry.size()<2:
+	var itemsDict = getSelectedValue(getItemKey(type), {})
+	for itemID in itemsDict:
+		var amount = itemsDict[itemID]
+		if !amount:
 			continue
-		var id = itemEntry[0]
-		var amount = itemEntry[1]
-		addItem(type, id, amount, false)
+		addItem(type, itemID, amount, false)
 
 func _on_idedit_text_entered(new_text):
 	var nid = new_text
@@ -266,14 +264,14 @@ func _on_create_pressed():
 		"maxHarvests":1,
 		"name":"Plant",
 		"description":"",
-		"maxUnwateredLifespan":1,
-		"harvestingCooldown":1,
+		"maxNeglect":1,
+		"harvestInterval":1,
 		"rarity":1,
 		"plantable": true,
 	}
 	
 	for type in itemTypes.values():
-		cached[nid][getItemKey(type)] = []
+		cached[nid][getItemKey(type)] = {}
 	
 	addPlantButton(nid, "Plant")
 

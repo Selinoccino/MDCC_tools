@@ -66,6 +66,7 @@ func updateItemForRecipe(item:TreeItem, recid:String, recipe=null) -> void:
 	item.set_metadata(0, recid)
 
 func _on_recipes_tree_item_activated() -> void:
+	print("asdas")
 	if lastItem:
 		var lastRecid : String = lastItem.get_metadata(0) as String
 		if lastRecid:
@@ -75,14 +76,17 @@ func _on_recipes_tree_item_activated() -> void:
 	
 	var ti : TreeItem = rectree.get_selected()
 	if !ti:
+		print("noo")
 		return
 	
 	var recid : String = ti.get_metadata(0) as String
 	if !recid:
+		print("aa")
 		return
 	
 	var rec : Dictionary = getRecipe(recid)
 	if !rec:
+		print("norec"+recid)
 		return
 	
 	lastItem = ti
@@ -92,6 +96,7 @@ func saveToFile() -> bool:
 	var p : String = Manager.getPath("recipes")
 	var f := FileAccess.open(p, FileAccess.WRITE)
 	
+	recipes[rectree.get_selected().get_metadata(0)] = $singleRecipeEditor.updateDictionary()
 	
 	if !f:
 		return false
@@ -124,6 +129,6 @@ func _on_add_pressed() -> void:
 		idx += 1
 		newID = "recipe%s" % str(idx).pad_zeros(2)
 	
-	recipes[newID] = {}
+	recipes[newID] = {"name":"Recipe"}
 	
 	rectree.set_selected(addNewRecipeItem(newID), 0)
